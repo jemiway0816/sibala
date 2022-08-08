@@ -26,7 +26,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
+    
+    @IBAction func moveToPlayer2(_ sender: UISwipeGestureRecognizer)
+    {
+        self.performSegue(withIdentifier: "gotoP2", sender: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        
+        
+    }
     var playerNum = 1
     @IBAction func playerNumStepper(_ sender: UIStepper)
     {
@@ -55,10 +65,10 @@ class ViewController: UIViewController {
         numArray[2] = Int.random(in: 1...6)
         numArray[3] = Int.random(in: 1...6)
         
-        numImageView1.image = UIImage(systemName: "die.face."+String(numArray[0]))
-        numImageView2.image = UIImage(systemName: "die.face."+String(numArray[1]))
-        numImageView3.image = UIImage(systemName: "die.face."+String(numArray[2]))
-        numImageView4.image = UIImage(systemName: "die.face."+String(numArray[3]))
+        numImageView1.image = UIImage(named: "dice"+String(numArray[0]))
+        numImageView2.image = UIImage(named: "dice"+String(numArray[1]))
+        numImageView3.image = UIImage(named: "dice"+String(numArray[2]))
+        numImageView4.image = UIImage(named: "dice"+String(numArray[3]))
 
         playerLabel.text = playerNameTextField.text! + " 擲出"
         playMessageLabel.text = ""

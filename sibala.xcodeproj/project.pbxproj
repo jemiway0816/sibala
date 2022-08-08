@@ -16,6 +16,8 @@
 		DA006D4D289F3DD700304F09 /* sibalaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D4C289F3DD700304F09 /* sibalaTests.swift */; };
 		DA006D57289F3DD700304F09 /* sibalaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D56289F3DD700304F09 /* sibalaUITests.swift */; };
 		DA006D59289F3DD700304F09 /* sibalaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D58289F3DD700304F09 /* sibalaUITestsLaunchTests.swift */; };
+		DA943EC828A1440F000E9B31 /* Player2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA943EC728A1440F000E9B31 /* Player2ViewController.swift */; };
+		DA943ECA28A144D0000E9B31 /* Player3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA943EC928A144D0000E9B31 /* Player3ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		DA006D52289F3DD700304F09 /* sibalaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sibalaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA006D56289F3DD700304F09 /* sibalaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibalaUITests.swift; sourceTree = "<group>"; };
 		DA006D58289F3DD700304F09 /* sibalaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibalaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DA943EC728A1440F000E9B31 /* Player2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player2ViewController.swift; sourceTree = "<group>"; };
+		DA943EC928A144D0000E9B31 /* Player3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player3ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				DA006D35289F3DD500304F09 /* AppDelegate.swift */,
 				DA006D37289F3DD500304F09 /* SceneDelegate.swift */,
 				DA006D39289F3DD500304F09 /* ViewController.swift */,
+				DA943EC728A1440F000E9B31 /* Player2ViewController.swift */,
+				DA943EC928A144D0000E9B31 /* Player3ViewController.swift */,
 				DA006D3B289F3DD500304F09 /* Main.storyboard */,
 				DA006D3E289F3DD700304F09 /* Assets.xcassets */,
 				DA006D40289F3DD700304F09 /* LaunchScreen.storyboard */,
@@ -258,6 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA943ECA28A144D0000E9B31 /* Player3ViewController.swift in Sources */,
+				DA943EC828A1440F000E9B31 /* Player2ViewController.swift in Sources */,
 				DA006D3A289F3DD500304F09 /* ViewController.swift in Sources */,
 				DA006D36289F3DD500304F09 /* AppDelegate.swift in Sources */,
 				DA006D38289F3DD500304F09 /* SceneDelegate.swift in Sources */,
