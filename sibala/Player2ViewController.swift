@@ -7,6 +7,8 @@
 
 import UIKit
 
+var p2GetScore = 0
+var numArray = [0,0,0,0]
 
 class Player2ViewController: UIViewController
 {
@@ -23,9 +25,7 @@ class Player2ViewController: UIViewController
     @IBOutlet weak var p2ScoreLabel: UITextField!
     
     var firstVC:ViewController?
-    var numArray = [0,0,0,0]
-    var p2GetScore = 0
-    
+   
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -33,21 +33,30 @@ class Player2ViewController: UIViewController
 
     override func viewWillAppear(_ animated: Bool)
     {
-        print(p2GetScore)
+        p2ScoreLabel.text = String(p2GetScore)
+        showDice()
+    }
+    
+    func getDice()
+    {
+        numArray[0] = Int.random(in: 1...6)
+        numArray[1] = Int.random(in: 1...6)
+        numArray[2] = Int.random(in: 1...6)
+        numArray[3] = Int.random(in: 1...6)
+    }
+    
+    func showDice()
+    {
+        p2NumImageView1.image = UIImage(named: "dice"+String(numArray[0]))
+        p2NumImageView2.image = UIImage(named: "dice"+String(numArray[1]))
+        p2NumImageView3.image = UIImage(named: "dice"+String(numArray[2]))
+        p2NumImageView4.image = UIImage(named: "dice"+String(numArray[3]))
     }
     
     @IBAction func onPlay(_ sender: Any)
     {
-        
-        self.numArray[0] = Int.random(in: 1...6)
-        self.numArray[1] = Int.random(in: 1...6)
-        self.numArray[2] = Int.random(in: 1...6)
-        self.numArray[3] = Int.random(in: 1...6)
-    
-        self.p2NumImageView1.image = UIImage(named: "dice"+String(self.numArray[0]))
-        self.p2NumImageView2.image = UIImage(named: "dice"+String(self.numArray[1]))
-        self.p2NumImageView3.image = UIImage(named: "dice"+String(self.numArray[2]))
-        self.p2NumImageView4.image = UIImage(named: "dice"+String(self.numArray[3]))
+        getDice()
+        showDice()
 
         p2PlayerLabel.text = p2PlayerNameTextField.text! + " 擲出"
         p2PlayMessageLabel.text = ""
@@ -57,6 +66,10 @@ class Player2ViewController: UIViewController
         if let aNum = firstVC?.getScore
         {
             p2GetScore = aNum
+        }
+        else
+        {
+            p2GetScore = 0
         }
         
         p2PlayMessageLabel.text = firstVC?.stringDic[firstVC!.messageNum]
@@ -80,12 +93,13 @@ class Player2ViewController: UIViewController
     
     @IBAction func moveToPlayer3(_ sender: UISwipeGestureRecognizer)
     {
-        print("aaa")
-        if let thridVC = self.storyboard?.instantiateViewController(withIdentifier: "Player3ViewController") as? Player3ViewController
+        if playerNum > 2
         {
-            print("bbb")
-            thridVC.firstVC = self.firstVC
-            self.present(thridVC, animated: true)
+           if let thridVC = self.storyboard?.instantiateViewController(withIdentifier: "Player3ViewController") as? Player3ViewController
+            {
+                thridVC.firstVC = self.firstVC
+                self.present(thridVC, animated: true)
+            }
         }
     }
     @IBAction func moveToPlayer1(_ sender: UISwipeGestureRecognizer)

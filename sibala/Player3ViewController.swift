@@ -7,6 +7,9 @@
 
 import UIKit
 
+var p3NumArray = [0,0,0,0]
+var p3GetScore = 0
+
 class Player3ViewController: UIViewController
 {
     var firstVC:ViewController?
@@ -22,9 +25,6 @@ class Player3ViewController: UIViewController
     
     @IBOutlet weak var p3ScoreLabel: UITextField!
     
-    var numArray = [0,0,0,0]
-    var p3GetScore = 0
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -33,28 +33,43 @@ class Player3ViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         print(p3GetScore)
+        p3ScoreLabel.text = String(p3GetScore)
+        showDice()
     }
+    
+    func getDice()
+    {
+        p3NumArray[0] = Int.random(in: 1...6)
+        p3NumArray[1] = Int.random(in: 1...6)
+        p3NumArray[2] = Int.random(in: 1...6)
+        p3NumArray[3] = Int.random(in: 1...6)
+    }
+    func showDice()
+    {
+        p3NumImageView1.image = UIImage(named:"dice"+String(p3NumArray[0]))
+        p3NumImageView2.image = UIImage(named: "dice"+String(p3NumArray[1]))
+        p3NumImageView3.image = UIImage(named: "dice"+String(p3NumArray[2]))
+        p3NumImageView4.image = UIImage(named: "dice"+String(p3NumArray[3]))
+    }
+    
     
     @IBAction func onPlay(_ sender: Any)
     {
-        self.numArray[0] = Int.random(in: 1...6)
-        self.numArray[1] = Int.random(in: 1...6)
-        self.numArray[2] = Int.random(in: 1...6)
-        self.numArray[3] = Int.random(in: 1...6)
-    
-        self.p3NumImageView1.image = UIImage(named: "dice"+String(self.numArray[0]))
-        self.p3NumImageView2.image = UIImage(named: "dice"+String(self.numArray[1]))
-        self.p3NumImageView3.image = UIImage(named: "dice"+String(self.numArray[2]))
-        self.p3NumImageView4.image = UIImage(named: "dice"+String(self.numArray[3]))
+        getDice()
+        showDice()
 
         p3PlayerLabel.text = p3PlayerNameTextField.text! + " 擲出"
         p3PlayMessageLabel.text = ""
 
-        firstVC?.doCount(numArray)
+        firstVC?.doCount(p3NumArray)
        
         if let aNum = firstVC?.getScore
         {
             p3GetScore = aNum
+        }
+        else
+        {
+            p3GetScore = 0
         }
         
         p3PlayMessageLabel.text = firstVC?.stringDic[firstVC!.messageNum]

@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import AVFoundation
+
+var playerNum = 1
+var player3:AVAudioPlayer?
 
 class ViewController: UIViewController {
 
-    
     @IBOutlet weak var playerNameTextField: UITextField!
     @IBOutlet weak var playerLabel: UILabel!
     @IBOutlet weak var playMessageLabel: UILabel!
@@ -22,49 +25,71 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerNumLabel: UILabel!
     @IBOutlet weak var scoreLabel: UITextField!
     
-    override func viewDidLoad() {
+    var getScore = 0
+    var messageNum = 0
+    var numArray = [0,0,0,0]
+    var sound = 0
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        if let url2 = Bundle.main.url(forResource: "骰子聲", withExtension: "")
+        {
+            print("get mp3")
+            player3 = try? AVAudioPlayer(contentsOf: url2)
+        }
     }
     
-    
-    @IBAction func moveToPlayer2(_ sender: UISwipeGestureRecognizer)
+    override func viewDidDisappear(_ animated: Bool)
     {
         
-        if let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "Player2ViewController") as? Player2ViewController
-        {
-            secondVC.firstVC = self
-            print("set ok")
-            self.present(secondVC, animated: true)
-        }
+    }
+    
+    @IBAction func soundSetting(_ sender: UISegmentedControl)
+    {
+        //print("soundSetting : \(sender)")
+        print(sender.selectedSegmentIndex)
         
-//        self.performSegue(withIdentifier: "gotoP2", sender: nil)
+        if sender.selectedSegmentIndex == 0
+        {
+            sound = 0
+        }
+        else
+        {
+            sound = 1
+        }
+    }
+    @IBAction func moveToPlayer2(_ sender: UISwipeGestureRecognizer)
+    {
+        if playerNum > 1
+        {
+            if let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "Player2ViewController") as? Player2ViewController
+            {
+                secondVC.firstVC = self
+                print("set ok")
+                self.present(secondVC, animated: true)
+            }
+    //        self.performSegue(withIdentifier: "gotoP2", sender: nil)
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         
-        
     }
-    
-    var playerNum = 1
-    public var messageNum = 0
-    public var getScore = 0
-    var numArray = [0,0,0,0]
-    
+  
     let stringDic:[Int:String] =
     [
         0:"",
         3:"擲出 BiGi 有夠慘",
-        111:"三個骰子相同，再擲一次",
+        333:"三個骰子相同，再擲一次",
         6666:"擲出 豹子!! 通殺",
         1234:"骰子都不同，再擲一次"
     ]
     
     @IBAction func playerNumStepper(_ sender: UIStepper)
     {
-        print (sender.value)
+//        print (sender.value)
         playerNum = Int(sender.value)
-        
         playerNumLabel.text = " \(playerNum) 人"
     }
     
@@ -73,14 +98,18 @@ class ViewController: UIViewController {
         view.endEditing(true)
     }
        
-    public func doCount(_ numArray:[Int])
+    func doCount(_ numArray:[Int])
     {
         var eyeCount = 0;
         var eyeNum = 0;
         var getNumOne = 0;
         var getNumTwo = 0;
         
-        print("doCount")
+        if sound == 0
+        {
+           print("play mp3")
+           player3?.play()
+        }
         
         for indexOne in 0...2
         {
