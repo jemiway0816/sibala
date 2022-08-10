@@ -16,6 +16,7 @@
 		DA006D4D289F3DD700304F09 /* sibalaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D4C289F3DD700304F09 /* sibalaTests.swift */; };
 		DA006D57289F3DD700304F09 /* sibalaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D56289F3DD700304F09 /* sibalaUITests.swift */; };
 		DA006D59289F3DD700304F09 /* sibalaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D58289F3DD700304F09 /* sibalaUITestsLaunchTests.swift */; };
+		DA89C8C228A3359A0064078A /* 骰子聲.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA89C8C128A3359A0064078A /* 骰子聲.mp3 */; };
 		DA943EC828A1440F000E9B31 /* Player2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA943EC728A1440F000E9B31 /* Player2ViewController.swift */; };
 		DA943ECA28A144D0000E9B31 /* Player3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA943EC928A144D0000E9B31 /* Player3ViewController.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		DA006D52289F3DD700304F09 /* sibalaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sibalaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA006D56289F3DD700304F09 /* sibalaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibalaUITests.swift; sourceTree = "<group>"; };
 		DA006D58289F3DD700304F09 /* sibalaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibalaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DA89C8C128A3359A0064078A /* 骰子聲.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "骰子聲.mp3"; sourceTree = "<group>"; };
 		DA943EC728A1440F000E9B31 /* Player2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player2ViewController.swift; sourceTree = "<group>"; };
 		DA943EC928A144D0000E9B31 /* Player3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player3ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +114,7 @@
 				DA006D3E289F3DD700304F09 /* Assets.xcassets */,
 				DA006D40289F3DD700304F09 /* LaunchScreen.storyboard */,
 				DA006D43289F3DD700304F09 /* Info.plist */,
+				DA89C8C128A3359A0064078A /* 骰子聲.mp3 */,
 			);
 			path = sibala;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				DA006D42289F3DD700304F09 /* LaunchScreen.storyboard in Resources */,
 				DA006D3F289F3DD700304F09 /* Assets.xcassets in Resources */,
 				DA006D3D289F3DD500304F09 /* Main.storyboard in Resources */,
+				DA89C8C228A3359A0064078A /* 骰子聲.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

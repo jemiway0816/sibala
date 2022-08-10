@@ -33,9 +33,9 @@ class ViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if let url2 = Bundle.main.url(forResource: "骰子聲", withExtension: "")
+    
+        if let url2 = Bundle.main.url(forResource: "骰子聲", withExtension: "mp3")
         {
-            print("get mp3")
             player3 = try? AVAudioPlayer(contentsOf: url2)
         }
     }
@@ -45,20 +45,6 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func soundSetting(_ sender: UISegmentedControl)
-    {
-        //print("soundSetting : \(sender)")
-        print(sender.selectedSegmentIndex)
-        
-        if sender.selectedSegmentIndex == 0
-        {
-            sound = 0
-        }
-        else
-        {
-            sound = 1
-        }
-    }
     @IBAction func moveToPlayer2(_ sender: UISwipeGestureRecognizer)
     {
         if playerNum > 1
@@ -105,11 +91,13 @@ class ViewController: UIViewController {
         var getNumOne = 0;
         var getNumTwo = 0;
         
+        /*
         if sound == 0
         {
            print("play mp3")
            player3?.play()
         }
+        */
         
         for indexOne in 0...2
         {
@@ -195,17 +183,28 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func onPlay(_ sender: UIButton)
+    
+    func getDice()
     {
         self.numArray[0] = Int.random(in: 1...6)
         self.numArray[1] = Int.random(in: 1...6)
         self.numArray[2] = Int.random(in: 1...6)
         self.numArray[3] = Int.random(in: 1...6)
+    }
     
+    func showDice()
+    {
         self.numImageView1.image = UIImage(named: "dice"+String(self.numArray[0]))
         self.numImageView2.image = UIImage(named: "dice"+String(self.numArray[1]))
         self.numImageView3.image = UIImage(named: "dice"+String(self.numArray[2]))
         self.numImageView4.image = UIImage(named: "dice"+String(self.numArray[3]))
+    }
+    
+    @IBAction func onPlay(_ sender: UIButton)
+    {
+
+        getDice()
+        showDice()
 
         playerLabel.text = playerNameTextField.text! + " 擲出"
         playMessageLabel.text = ""

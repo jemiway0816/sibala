@@ -441,9 +441,6 @@
                                     <segment title="ON"/>
                                     <segment title="OFF"/>
                                 </segments>
-                                <connections>
-                                    <action selector="soundSetting:" destination="TMP-ZI-rVF" eventType="valueChanged" id="GK0-Ss-gpp"/>
-                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="串場動畫 : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mck-sP-Gmf">
                                 <rect key="frame" x="32" y="171" width="142" height="30"/>
