@@ -17,6 +17,7 @@
 		DA006D57289F3DD700304F09 /* sibalaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D56289F3DD700304F09 /* sibalaUITests.swift */; };
 		DA006D59289F3DD700304F09 /* sibalaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA006D58289F3DD700304F09 /* sibalaUITestsLaunchTests.swift */; };
 		DA89C8C228A3359A0064078A /* 骰子聲.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DA89C8C128A3359A0064078A /* 骰子聲.mp3 */; };
+		DAFBFA1128A7A609003C0C0D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBFA1028A7A609003C0C0D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		DA006D56289F3DD700304F09 /* sibalaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibalaUITests.swift; sourceTree = "<group>"; };
 		DA006D58289F3DD700304F09 /* sibalaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sibalaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DA89C8C128A3359A0064078A /* 骰子聲.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "骰子聲.mp3"; sourceTree = "<group>"; };
+		DAFBFA1028A7A609003C0C0D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				DA006D35289F3DD500304F09 /* AppDelegate.swift */,
 				DA006D37289F3DD500304F09 /* SceneDelegate.swift */,
 				DA006D39289F3DD500304F09 /* ViewController.swift */,
+				DAFBFA1028A7A609003C0C0D /* TabBarController.swift */,
 				DA006D3B289F3DD500304F09 /* Main.storyboard */,
 				DA006D3E289F3DD700304F09 /* Assets.xcassets */,
 				DA006D40289F3DD700304F09 /* LaunchScreen.storyboard */,
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA006D3A289F3DD500304F09 /* ViewController.swift in Sources */,
+				DAFBFA1128A7A609003C0C0D /* TabBarController.swift in Sources */,
 				DA006D36289F3DD500304F09 /* AppDelegate.swift in Sources */,
 				DA006D38289F3DD500304F09 /* SceneDelegate.swift in Sources */,
 			);

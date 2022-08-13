@@ -11,7 +11,7 @@
         <!--Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="sibala" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="sibala" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,7 +124,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="f04-hD-Bwh"/>
                     <navigationItem key="navigationItem" id="a7S-M2-rZN"/>
                     <connections>
-                        <outlet property="backImageView" destination="IRP-S7-2Oo" id="ZEC-2Q-39J"/>
+                        <outlet property="mainBackImageView" destination="IRP-S7-2Oo" id="ZEC-2Q-39J"/>
                         <outlet property="playMessageLabel" destination="yse-47-Ut2" id="BBB-aE-3F5"/>
                         <outlet property="playerLabel" destination="9B7-us-W4j" id="sC5-jJ-tcn"/>
                         <outlet property="playerNameTextField" destination="tgE-nU-6bp" id="cva-K0-MBq"/>
@@ -143,7 +143,7 @@
         <!--設定-->
         <scene sceneID="9CX-dZ-zeE">
             <objects>
-                <viewController id="TMP-ZI-rVF" customClass="ViewController" customModule="sibala" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="adjustViewController" id="TMP-ZI-rVF" customClass="ViewController" customModule="sibala" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nta-wy-ffr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -222,17 +222,20 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Y5a-9E-f4W">
                                 <rect key="frame" x="282" y="125" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="soundSwitch:" destination="TMP-ZI-rVF" eventType="valueChanged" id="xHb-Jh-qtJ"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ww8-1I-Ysb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="設定" image="pencil.circle.fill" catalog="system" selectedImage="pencil.circle" id="2qZ-V3-ubQ">
                         <color key="badgeColor" systemColor="systemPinkColor"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="adjustBackImageView" destination="1Eu-dF-Wq3" id="VDk-05-ogf"/>
                         <outlet property="playerNumLabel" destination="CYK-74-8Hg" id="i2u-Cv-1rr"/>
-                        <outlet property="soundSwitch" destination="Y5a-9E-f4W" id="avV-ZK-t3X"/>
                         <outlet property="tintValueLabel" destination="Fww-OA-k7r" id="oP3-0G-RBc"/>
                     </connections>
                 </viewController>
@@ -243,7 +246,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="hOG-wS-T4S">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="b7M-7Q-pyA" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="b7M-7Q-pyA" customClass="TabBarController" customModule="sibala" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ThJ-rK-rCP">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

@@ -16,42 +16,42 @@ class ViewController: UIViewController {
 
     @IBOutlet var diceValueImgView: [UIImageView]!
     
-    @IBOutlet weak var soundSwitch: UISwitch!
     @IBOutlet weak var playerNumLabel: UILabel!
     @IBOutlet weak var scoreLabel: UITextField!
     
     @IBOutlet weak var playerOletSegment: UISegmentedControl!
     @IBOutlet weak var tintValueLabel: UILabel!
     
+    @IBOutlet weak var mainBackImageView: UIImageView!
+    @IBOutlet weak var adjustBackImageView: UIImageView!
     
-    @IBOutlet weak var backImageView: UIImageView!
-    
-    var playerNum = 1           // 有幾個玩家
     var whichPlayer = 0         // 現在是哪個玩家 0 1 2 3
-    var playerNameArray:[String] = ["John","Mary","Tom","Amy"]
-    var playerScoreArray:[Int] = [0,0,0,0]
+    var playerNameArray:[String] = ["John","Mary","Tom","Amy"]      // 預設玩家名
     var gotScore = 0
     var messageValue = 0
     var numArray = [0,0,0,0]
-    var player3:AVAudioPlayer?
+    var mp3Player:AVAudioPlayer?
+    var backTint:Float = 1
+    var soundOnOff = 0
     
+    // 每個玩家骰子點數與訊息的結構
     struct DiceValue
     {
-        var dice1 = 0
-        var dice2 = 0
-        var dice3 = 0
-        var dice4 = 0
+        var diceArray:[Int] = [0,0,0,0]
         var diceScore = 0
         var msgValue = 0
     }
+    
+    // 玩家資訊的陣列
     var playerDiceValue:[DiceValue] =
     [
-        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0),
-        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0),
-        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0),
-        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0)
+        DiceValue(diceArray: [0,0,0,0], diceScore: 0, msgValue: 0),
+        DiceValue(diceArray: [0,0,0,0], diceScore: 0, msgValue: 0),
+        DiceValue(diceArray: [0,0,0,0], diceScore: 0, msgValue: 0),
+        DiceValue(diceArray: [0,0,0,0], diceScore: 0, msgValue: 0)
     ]
     
+    // 顯示訊息字典
     let stringDic:[Int:String] =
     [
         0:"",
@@ -65,34 +65,44 @@ class ViewController: UIViewController {
     {
         super.viewDidLoad()
     
-        if let url2 = Bundle.main.url(forResource: "骰子聲", withExtension: "mp3")
+        // 載入聲音
+        if let url = Bundle.main.url(forResource: "骰子聲", withExtension: "mp3")
         {
-            player3 = try? AVAudioPlayer(contentsOf: url2)
+            mp3Player = try? AVAudioPlayer(contentsOf: url)
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool)
+    @IBAction func soundSwitch(_ sender: UISwitch)
     {
-        
+        if sender.isOn == true
+        {
+            soundOnOff = 1
+        }
+        else
+        {
+            soundOnOff = 0
+        }
     }
     
     @IBAction func tintAdjustSlide(_ sender: UISlider)
     {
+        // 調整背景圖透明度
         tintValueLabel.text = String(Int(sender.value * 255))
-        
-        backImageView
+        adjustBackImageView.alpha = CGFloat(sender.value)
     }
     
     @IBAction func playerSegment(_ sender: UISegmentedControl)
     {
+        // 切換玩家
         playerNameTextField.text = playerNameArray[sender.selectedSegmentIndex]
         whichPlayer = sender.selectedSegmentIndex
         updateUI()
     }
     
-    
     @IBAction func returnTextField(_ sender: Any)
     {
+        // 更改玩家名
+        playerNameArray[whichPlayer] = playerNameTextField.text!
         view.endEditing(true)
     }
        
@@ -103,13 +113,11 @@ class ViewController: UIViewController {
         var getNumOne = 0;
         var getNumTwo = 0;
         
-        /*
-        if soundSwitch.isOn == true
+        if soundOnOff == 1
         {
-           print("play mp3")
-           player3?.play()
+            print("play mp3")
+            mp3Player?.play()
         }
-        */
         
         for indexOne in 0...2
         {
@@ -196,53 +204,39 @@ class ViewController: UIViewController {
     
     func updateUI()
     {
-        playerLabel.text = playerNameTextField.text! + " 擲出"
+        // 顯示訊息
+        playerLabel.text = playerNameTextField.text! + " 擲出 \(playerDiceValue[whichPlayer].diceScore) 點"
         playMessageLabel.text = stringDic[playerDiceValue[whichPlayer].msgValue]
         
-        scoreLabel.text = String(playerDiceValue[whichPlayer].diceScore)
-
-        diceValueImgView[0].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice1))
-        diceValueImgView[1].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice2))
-        diceValueImgView[2].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice3))
-        diceValueImgView[3].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice4))
+        if playerDiceValue[whichPlayer].diceScore == 0
+        {
+            scoreLabel.text = ""
+        }
+        else
+        {
+            // 顯示骰子點數
+            scoreLabel.text = String(playerDiceValue[whichPlayer].diceScore)
+        }
+        
+        for i in 0...3
+        {
+            // 更換四顆骰子的點數圖片
+            diceValueImgView[i].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].diceArray[i]))
+        }
     }
-    
     
     @IBAction func onPlay(_ sender: UIButton)
     {
         for i in 0...3
         {
             numArray[i] = Int.random(in: 1...6)
-            diceValueImgView[i].image = UIImage(named: "dice"+String(numArray[i]))
-            switch i
-            {
-                case 0:
-                    playerDiceValue[whichPlayer].dice1 = numArray[i]
-                case 1:
-                    playerDiceValue[whichPlayer].dice2 = numArray[i]
-                case 2:
-                    playerDiceValue[whichPlayer].dice3 = numArray[i]
-                case 3:
-                    playerDiceValue[whichPlayer].dice4 = numArray[i]
-                default:
-                    print("out of range")
-            }
+            playerDiceValue[whichPlayer].diceArray[i] = numArray[i]         // 儲存骰子點數
         }
         
         doCount(numArray)   // 計算點數放進gotScore，顯示訊息index放進messageValue
-        playerDiceValue[whichPlayer].diceScore = gotScore   // 記錄玩家分數
-        playerDiceValue[whichPlayer].msgValue = messageValue
-        
-        // print score
-        if gotScore == 0
-        {
-            scoreLabel.text = ""
-        }
-        else
-        {
-            scoreLabel.text = String(gotScore)
-            playerLabel.text = playerLabel.text! + " \(gotScore) 點"
-        }
+        playerDiceValue[whichPlayer].diceScore = gotScore       // 記錄玩家分數
+        playerDiceValue[whichPlayer].msgValue = messageValue    // 記錄顯示訊息
+        updateUI()
     }
 }
 
