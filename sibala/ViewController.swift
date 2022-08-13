@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 
+var soundOnOff = 0
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var playerNameTextField: UITextField!
@@ -32,7 +34,6 @@ class ViewController: UIViewController {
     var numArray = [0,0,0,0]
     var mp3Player:AVAudioPlayer?
     var backTint:Float = 1
-    var soundOnOff = 0
     
     // 每個玩家骰子點數與訊息的結構
     struct DiceValue
@@ -89,6 +90,7 @@ class ViewController: UIViewController {
         // 調整背景圖透明度
         tintValueLabel.text = String(Int(sender.value * 255))
         adjustBackImageView.alpha = CGFloat(sender.value)
+        backTint = sender.value
     }
     
     @IBAction func playerSegment(_ sender: UISegmentedControl)
@@ -115,7 +117,7 @@ class ViewController: UIViewController {
         
         if soundOnOff == 1
         {
-            print("play mp3")
+//            print("play mp3")
             mp3Player?.play()
         }
         

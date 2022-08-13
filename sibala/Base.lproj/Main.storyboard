@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Play-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="mainViewController" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="sibala" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,15 +84,6 @@
                                     <action selector="onPlay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2UY-03-pA9"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hqo-6j-Mig">
-                                <rect key="frame" x="106" y="160" width="195" height="189"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" systemColor="labelColor"/>
-                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="150"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z9Q-vs-Xjc">
                                 <rect key="frame" x="42" y="62" width="322" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -107,7 +98,7 @@
                                     <action selector="playerSegment:" destination="BYZ-38-t0r" eventType="valueChanged" id="QiH-js-W2G"/>
                                 </connections>
                             </segmentedControl>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgE-nU-6bp">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgE-nU-6bp">
                                 <rect key="frame" x="153" y="117" width="180" height="39.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -116,12 +107,21 @@
                                     <action selector="returnTextField:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="Zan-5g-0r1"/>
                                 </connections>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" background="pattenGolden1" translatesAutoresizingMaskIntoConstraints="NO" id="Hqo-6j-Mig">
+                                <rect key="frame" x="110" y="164" width="195" height="189"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="150"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="f04-hD-Bwh"/>
+                    <tabBarItem key="tabBarItem" title="Play" image="dice" catalog="system" selectedImage="dice.fill" id="f04-hD-Bwh"/>
                     <navigationItem key="navigationItem" id="a7S-M2-rZN"/>
                     <connections>
                         <outlet property="mainBackImageView" destination="IRP-S7-2Oo" id="ZEC-2Q-39J"/>
@@ -140,7 +140,7 @@
             </objects>
             <point key="canvasLocation" x="886.95652173913049" y="-210.26785714285714"/>
         </scene>
-        <!--設定-->
+        <!--Setting-->
         <scene sceneID="9CX-dZ-zeE">
             <objects>
                 <viewController storyboardIdentifier="adjustViewController" id="TMP-ZI-rVF" customClass="ViewController" customModule="sibala" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,7 +163,7 @@
                                 <rect key="frame" x="32" y="371" width="349" height="418"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">        計點方式係先扣除2顆點數相同的骰子，其餘2顆點數合計即為其所得點數。 
+                                <mutableString key="text">        計點方式是先扣除2顆點數相同的骰子，其餘2顆點數合計即為其所得點數。 
 
         若有兩組骰子點數相同，則取最大點的一組相加，若有3顆骰子相同且另一顆不同，必須重擲。
 
@@ -172,7 +172,7 @@
         若四顆骰子正面均相同，稱為「一色」（外省人稱豹子），不論點數多寡，均以勝計。
 
         若所擲骰子正面均不相同，稱為「無面」或「無點」，應重新擲至有點數為止。
-</string>
+</mutableString>
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -205,14 +205,14 @@
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wGG-qw-gBq">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wGG-qw-gBq">
                                 <rect key="frame" x="198" y="181" width="186" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="tintAdjustSlide:" destination="TMP-ZI-rVF" eventType="valueChanged" id="IbM-F7-xar"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="128" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fww-OA-k7r">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="255" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fww-OA-k7r">
                                 <rect key="frame" x="262" y="218" width="58" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -230,7 +230,7 @@
                         <viewLayoutGuide key="safeArea" id="ww8-1I-Ysb"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="設定" image="pencil.circle.fill" catalog="system" selectedImage="pencil.circle" id="2qZ-V3-ubQ">
+                    <tabBarItem key="tabBarItem" title="Setting" image="pencil.circle" catalog="system" selectedImage="pencil.circle.fill" id="2qZ-V3-ubQ">
                         <color key="badgeColor" systemColor="systemPinkColor"/>
                     </tabBarItem>
                     <connections>
@@ -267,8 +267,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dice" catalog="system" width="128" height="113"/>
+        <image name="dice.fill" catalog="system" width="128" height="113"/>
         <image name="dice6" width="139" height="151"/>
         <image name="dice_1" width="379" height="610"/>
+        <image name="pattenGolden1" width="800" height="800"/>
         <image name="pencil.circle" catalog="system" width="128" height="121"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
