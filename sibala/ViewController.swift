@@ -8,27 +8,58 @@
 import UIKit
 import AVFoundation
 
-var playerNum = 1
-var player3:AVAudioPlayer?
-
 class ViewController: UIViewController {
 
     @IBOutlet weak var playerNameTextField: UITextField!
     @IBOutlet weak var playerLabel: UILabel!
     @IBOutlet weak var playMessageLabel: UILabel!
 
-    @IBOutlet weak var numImageView1: UIImageView!
-    @IBOutlet weak var numImageView2: UIImageView!
-    @IBOutlet weak var numImageView3: UIImageView!
-    @IBOutlet weak var numImageView4: UIImageView!
+    @IBOutlet var diceValueImgView: [UIImageView]!
     
+    @IBOutlet weak var soundSwitch: UISwitch!
     @IBOutlet weak var playerNumLabel: UILabel!
     @IBOutlet weak var scoreLabel: UITextField!
     
-    var getScore = 0
-    var messageNum = 0
+    @IBOutlet weak var playerOletSegment: UISegmentedControl!
+    @IBOutlet weak var tintValueLabel: UILabel!
+    
+    
+    @IBOutlet weak var backImageView: UIImageView!
+    
+    var playerNum = 1           // 有幾個玩家
+    var whichPlayer = 0         // 現在是哪個玩家 0 1 2 3
+    var playerNameArray:[String] = ["John","Mary","Tom","Amy"]
+    var playerScoreArray:[Int] = [0,0,0,0]
+    var gotScore = 0
+    var messageValue = 0
     var numArray = [0,0,0,0]
-    var sound = 0
+    var player3:AVAudioPlayer?
+    
+    struct DiceValue
+    {
+        var dice1 = 0
+        var dice2 = 0
+        var dice3 = 0
+        var dice4 = 0
+        var diceScore = 0
+        var msgValue = 0
+    }
+    var playerDiceValue:[DiceValue] =
+    [
+        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0),
+        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0),
+        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0),
+        DiceValue(dice1: 0, dice2: 0, dice3: 0, dice4: 0, diceScore: 0 ,msgValue: 0)
+    ]
+    
+    let stringDic:[Int:String] =
+    [
+        0:"",
+        3:"擲出 BiGi 有夠慘",
+        333:"三個骰子相同，再擲一次",
+        6666:"擲出 豹子!! 通殺",
+        1234:"骰子都不同，再擲一次"
+    ]
     
     override func viewDidLoad()
     {
@@ -45,39 +76,20 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func moveToPlayer2(_ sender: UISwipeGestureRecognizer)
+    @IBAction func tintAdjustSlide(_ sender: UISlider)
     {
-        if playerNum > 1
-        {
-            if let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "Player2ViewController") as? Player2ViewController
-            {
-                secondVC.firstVC = self
-                print("set ok")
-                self.present(secondVC, animated: true)
-            }
-    //        self.performSegue(withIdentifier: "gotoP2", sender: nil)
-        }
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+        tintValueLabel.text = String(Int(sender.value * 255))
         
+        backImageView
     }
-  
-    let stringDic:[Int:String] =
-    [
-        0:"",
-        3:"擲出 BiGi 有夠慘",
-        333:"三個骰子相同，再擲一次",
-        6666:"擲出 豹子!! 通殺",
-        1234:"骰子都不同，再擲一次"
-    ]
     
-    @IBAction func playerNumStepper(_ sender: UIStepper)
+    @IBAction func playerSegment(_ sender: UISegmentedControl)
     {
-//        print (sender.value)
-        playerNum = Int(sender.value)
-        playerNumLabel.text = " \(playerNum) 人"
+        playerNameTextField.text = playerNameArray[sender.selectedSegmentIndex]
+        whichPlayer = sender.selectedSegmentIndex
+        updateUI()
     }
+    
     
     @IBAction func returnTextField(_ sender: Any)
     {
@@ -92,7 +104,7 @@ class ViewController: UIViewController {
         var getNumTwo = 0;
         
         /*
-        if sound == 0
+        if soundSwitch.isOn == true
         {
            print("play mp3")
            player3?.play()
@@ -129,14 +141,14 @@ class ViewController: UIViewController {
             }
             if (getNumOne+getNumTwo) == 3
             {
-                messageNum = 3
+                messageValue = 3
                 // "擲出 BiGi 有夠慘"
             }
             else
             {
-                messageNum = 0
+                messageValue = 0
             }
-            getScore = getNumOne+getNumTwo
+            gotScore = getNumOne+getNumTwo
         }
         else if eyeCount == 2
         {
@@ -150,18 +162,18 @@ class ViewController: UIViewController {
             }
             if getNumOne > eyeNum
             {
-                getScore = getNumOne+getNumOne
+                gotScore = getNumOne+getNumOne
             }
             else
             {
-                getScore = eyeNum+eyeNum
+                gotScore = eyeNum+eyeNum
             }
-            messageNum = 0
+            messageValue = 0
         }
         else if eyeCount == 3
         {
-            messageNum = 333
-            getScore = 0
+            messageValue = 333
+            gotScore = 0
             // "三個骰子相同，再擲一次"
         }
         else if eyeCount == 6
@@ -169,59 +181,67 @@ class ViewController: UIViewController {
             // 豹子
             getNumOne = numArray[0]
             getNumTwo = numArray[0]
-            getScore = getNumOne+getNumTwo
+            gotScore = getNumOne+getNumTwo
 
-            messageNum = 6666
+            messageValue = 6666
             // "擲出 豹子!! 通殺"
         }
         else
         {
-            messageNum = 1234
-            getScore = 0
+            messageValue = 1234
+            gotScore = 0
             // "骰子都不同，再擲一次"
         }
+    }
+    
+    func updateUI()
+    {
+        playerLabel.text = playerNameTextField.text! + " 擲出"
+        playMessageLabel.text = stringDic[playerDiceValue[whichPlayer].msgValue]
         
+        scoreLabel.text = String(playerDiceValue[whichPlayer].diceScore)
+
+        diceValueImgView[0].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice1))
+        diceValueImgView[1].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice2))
+        diceValueImgView[2].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice3))
+        diceValueImgView[3].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].dice4))
     }
     
-    
-    func getDice()
-    {
-        self.numArray[0] = Int.random(in: 1...6)
-        self.numArray[1] = Int.random(in: 1...6)
-        self.numArray[2] = Int.random(in: 1...6)
-        self.numArray[3] = Int.random(in: 1...6)
-    }
-    
-    func showDice()
-    {
-        self.numImageView1.image = UIImage(named: "dice"+String(self.numArray[0]))
-        self.numImageView2.image = UIImage(named: "dice"+String(self.numArray[1]))
-        self.numImageView3.image = UIImage(named: "dice"+String(self.numArray[2]))
-        self.numImageView4.image = UIImage(named: "dice"+String(self.numArray[3]))
-    }
     
     @IBAction func onPlay(_ sender: UIButton)
     {
-
-        getDice()
-        showDice()
-
-        playerLabel.text = playerNameTextField.text! + " 擲出"
-        playMessageLabel.text = ""
-
-        doCount(numArray)
+        for i in 0...3
+        {
+            numArray[i] = Int.random(in: 1...6)
+            diceValueImgView[i].image = UIImage(named: "dice"+String(numArray[i]))
+            switch i
+            {
+                case 0:
+                    playerDiceValue[whichPlayer].dice1 = numArray[i]
+                case 1:
+                    playerDiceValue[whichPlayer].dice2 = numArray[i]
+                case 2:
+                    playerDiceValue[whichPlayer].dice3 = numArray[i]
+                case 3:
+                    playerDiceValue[whichPlayer].dice4 = numArray[i]
+                default:
+                    print("out of range")
+            }
+        }
         
-        playMessageLabel.text = stringDic[messageNum]
+        doCount(numArray)   // 計算點數放進gotScore，顯示訊息index放進messageValue
+        playerDiceValue[whichPlayer].diceScore = gotScore   // 記錄玩家分數
+        playerDiceValue[whichPlayer].msgValue = messageValue
         
         // print score
-        if getScore == 0
+        if gotScore == 0
         {
             scoreLabel.text = ""
         }
         else
         {
-            scoreLabel.text = String(getScore)
-            playerLabel.text = playerLabel.text! + " " + String(getScore) + " 點"
+            scoreLabel.text = String(gotScore)
+            playerLabel.text = playerLabel.text! + " \(gotScore) 點"
         }
     }
 }
