@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     var gotScore = 0
     var messageValue = 0
     var numArray = [0,0,0,0]
+    var runArray:[Int] = [0,0,0,0]
     var mp3Player:AVAudioPlayer?
     var backTint:Float = 1
     
@@ -219,26 +220,51 @@ class ViewController: UIViewController {
             // 顯示骰子點數
             scoreLabel.text = String(playerDiceValue[whichPlayer].diceScore)
         }
-        
-        for i in 0...3
+    }
+    
+    var seconds = 0
+    var timer: Timer?
+    
+    @objc func countdown(timer: Timer)
+    {
+        seconds -= 1
+        if seconds == 0
         {
-            // 更換四顆骰子的點數圖片
-            diceValueImgView[i].image = UIImage(named: "dice"+String(playerDiceValue[whichPlayer].diceArray[i]))
+            for i in 0...3
+            {
+                 playerDiceValue[whichPlayer].diceArray[i] = numArray[i]         // 儲存骰子點數
+            }
+            doCount(numArray)   // 計算點數放進gotScore，顯示訊息index放進messageValue
+            playerDiceValue[whichPlayer].diceScore = gotScore       // 記錄玩家分數
+            playerDiceValue[whichPlayer].msgValue = messageValue    // 記錄顯示訊息
+            updateUI()
+            
+            timer.invalidate()
+        }
+        else
+        {
+            for i in 0...3
+            {
+                numArray[i] = Int.random(in: 1...6)
+                diceValueImgView[i].image = UIImage(named: "dice"+String(numArray[i]))
+            }
         }
     }
     
     @IBAction func onPlay(_ sender: UIButton)
     {
-        for i in 0...3
+        if seconds != 0
         {
-            numArray[i] = Int.random(in: 1...6)
-            playerDiceValue[whichPlayer].diceArray[i] = numArray[i]         // 儲存骰子點數
+            return
         }
         
-        doCount(numArray)   // 計算點數放進gotScore，顯示訊息index放進messageValue
-        playerDiceValue[whichPlayer].diceScore = gotScore       // 記錄玩家分數
-        playerDiceValue[whichPlayer].msgValue = messageValue    // 記錄顯示訊息
-        updateUI()
+        seconds = 8
+        timer = Timer.scheduledTimer(
+             timeInterval: 0.2,
+             target: self,
+             selector: #selector(countdown(timer:)),
+             userInfo: nil,
+             repeats: true)
     }
 }
 

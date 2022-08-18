@@ -163,7 +163,7 @@
                                 <rect key="frame" x="32" y="371" width="349" height="418"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">        計點方式是先扣除2顆點數相同的骰子，其餘2顆點數合計即為其所得點數。 
+                                <string key="text">        計點方式是先扣除2顆點數相同的骰子，其餘2顆點數合計即為其所得點數。 
 
         若有兩組骰子點數相同，則取最大點的一組相加，若有3顆骰子相同且另一顆不同，必須重擲。
 
@@ -172,7 +172,7 @@
         若四顆骰子正面均相同，稱為「一色」（外省人稱豹子），不論點數多寡，均以勝計。
 
         若所擲骰子正面均不相同，稱為「無面」或「無點」，應重新擲至有點數為止。
-</mutableString>
+</string>
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
