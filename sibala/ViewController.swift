@@ -33,7 +33,6 @@ class ViewController: UIViewController {
     var messageValue = 0
     var numArray = [0,0,0,0]
     var runArray:[Int] = [0,0,0,0]
-    var mp3Player:AVAudioPlayer?
     var backTint:Float = 1
     
     // 每個玩家骰子點數與訊息的結構
@@ -63,6 +62,7 @@ class ViewController: UIViewController {
         1234:"骰子都不同，再擲一次"
     ]
     
+    var mp3Player:AVAudioPlayer?
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -115,12 +115,6 @@ class ViewController: UIViewController {
         var eyeNum = 0;
         var getNumOne = 0;
         var getNumTwo = 0;
-        
-        if soundOnOff == 1
-        {
-//            print("play mp3")
-            mp3Player?.play()
-        }
         
         for indexOne in 0...2
         {
@@ -256,6 +250,15 @@ class ViewController: UIViewController {
         if seconds != 0
         {
             return
+        }
+        
+        let globalQueue = DispatchQueue.global(qos: .default)
+        globalQueue.async
+        {
+            if soundOnOff == 1
+            {
+                self.mp3Player?.play()
+            }
         }
         
         seconds = 8
